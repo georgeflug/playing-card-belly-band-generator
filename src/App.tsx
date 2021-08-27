@@ -1,11 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
+import { PDFViewer } from '@react-pdf/renderer'
 import './App.css';
+import { MyPdf } from './Pdf'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header"> */}
+      <div>
         <label>Width</label>
         <input type="text"></input>
 
@@ -14,7 +15,13 @@ function App() {
 
         <label>Depth</label>
         <input type="text"></input>
-      </header>
+      </div>
+      <div>
+        <PDFViewer width="100%" height="1024px">
+          <MyPdf />
+        </PDFViewer>
+      </div>
+      {/* </header> */}
     </div>
   );
 }
