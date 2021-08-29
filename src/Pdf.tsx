@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
+import { paintBellyBand } from './belly-band-painter'
 
 // Create styles
 const styles = StyleSheet.create({
@@ -22,11 +23,12 @@ const styles = StyleSheet.create({
 
 function paintFunc(painter: any, availableWidth: number, availableHeight: number): null {
   // see examples @ http://pdfkit.org/demo/browser.html
-  painter
-    .moveTo(100, 150)
-    .lineTo(100, 250)
-    .lineTo(200, 250)
-    .fill('#FF3300');
+  // painter
+  //   .moveTo(100, 150)
+  //   .lineTo(100, 250)
+  //   .lineTo(200, 250)
+  //   .fill('#FF3300');
+  paintBellyBand(painter);
   return null;
 }
 
