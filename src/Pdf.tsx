@@ -1,6 +1,7 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
 import { paintBellyBand } from './belly-band-painter'
+import { BellyBand } from './belly-band'
 
 // Create styles
 const styles = StyleSheet.create({
@@ -28,7 +29,11 @@ function paintFunc(painter: any, availableWidth: number, availableHeight: number
   //   .lineTo(100, 250)
   //   .lineTo(200, 250)
   //   .fill('#FF3300');
-  paintBellyBand(painter);
+  paintBellyBand(painter, new BellyBand({
+    width: 44,
+    height: 80,
+    depth: 8,
+  }));
   return null;
 }
 
