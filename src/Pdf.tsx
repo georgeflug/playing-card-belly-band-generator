@@ -33,7 +33,10 @@ function paintFunc(painter: any, availableWidth: number, availableHeight: number
     width: 44,
     height: 80,
     depth: 8,
-  }));
+  }), {
+    x: -100,
+    y: 72,
+  });
   return null;
 }
 
