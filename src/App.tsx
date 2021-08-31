@@ -2,8 +2,8 @@ import { PDFViewer } from '@react-pdf/renderer'
 import { Provider } from 'react-redux'
 import './App.css';
 import { MyPdf } from './Pdf'
-import { store } from './store'
-import { useWidth } from './width-redux'
+import { store } from './redux/store'
+import { useWidth } from './redux/width-redux'
 
 const App = () => {
   const {width, setWidth} = useWidth();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
 import { paintBellyBand } from './belly-band-painter'
 import { BellyBand } from './belly-band'
-import { useWidth } from './width-redux'
+import { useWidth } from './redux/width-redux'
 
 // Create styles
 const styles = StyleSheet.create({
