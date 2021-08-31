@@ -1,9 +1,11 @@
 import { PDFViewer } from '@react-pdf/renderer'
+import { Provider } from 'react-redux'
 import './App.css';
 import { MyPdf } from './Pdf'
+import { store } from './store'
 import { useWidth } from './width-redux'
 
-function App() {
+const App = () => {
   const {width, setWidth} = useWidth();
 
   function handleWidthChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
@@ -25,7 +27,9 @@ function App() {
       </div>
       <div>
         <PDFViewer width="100%" height="1024px">
-          <MyPdf />
+          <Provider store={store}>
+            <MyPdf />
+          </Provider>
         </PDFViewer>
       </div>
       {/* </header> */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
 import { paintBellyBand } from './belly-band-painter'
 import { BellyBand } from './belly-band'
+import { useWidth } from './width-redux'
 
 // Create styles
 const styles = StyleSheet.create({
@@ -22,15 +23,9 @@ const styles = StyleSheet.create({
   }
 });
 
-function paintFunc(painter: any, availableWidth: number, availableHeight: number): null {
-  // see examples @ http://pdfkit.org/demo/browser.html
-  // painter
-  //   .moveTo(100, 150)
-  //   .lineTo(100, 250)
-  //   .lineTo(200, 250)
-  //   .fill('#FF3300');
+function paintFunc(painter: any, width: number, availableHeight: number): null {
   paintBellyBand(painter, new BellyBand({
-    width: 44,
+    width,
     height: 80,
     depth: 8,
   }), {
@@ -41,17 +36,21 @@ function paintFunc(painter: any, availableWidth: number, availableHeight: number
 }
 
 // Create Document Component
-export const MyPdf = () => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
-      </View>
-      <Canvas style={styles.canvas} paint={paintFunc}>
-      </Canvas>
-    </Page>
-  </Document>
-);
+export const MyPdf = () => {
+  const {width} = useWidth();
+
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text>Section #1</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>Section #2</Text>
+        </View>
+        <Canvas style={styles.canvas} paint={(painter) => paintFunc(painter, width, 0)}>
+        </Canvas>
+      </Page>
+    </Document>
+  )
+};
