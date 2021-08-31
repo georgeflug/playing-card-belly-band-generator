@@ -2,11 +2,13 @@ import { PDFViewer } from '@react-pdf/renderer'
 import { Provider } from 'react-redux'
 import './App.css';
 import { MyPdf } from './Pdf'
+import { useBellyBands } from './redux/belly-band-redux'
 import { store } from './redux/store'
 import { useWidth } from './redux/width-redux'
 
 const App = () => {
   const {width, setWidth} = useWidth();
+  const {bellyBands, addBellyBand} = useBellyBands();
 
   function handleWidthChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     setWidth(event.target.value);
@@ -24,6 +26,8 @@ const App = () => {
 
         <label>Depth</label>
         <input type="text"></input>
+
+        <button onClick={addBellyBand}>Add</button>
       </div>
       <div>
         <PDFViewer width="100%" height="1024px">
