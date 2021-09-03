@@ -1,8 +1,7 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
 import { paintBellyBand } from './belly-band-painter'
-import { BellyBand, BellyBandSpec } from './belly-band'
-import { useWidth } from './redux/width-redux'
+import { BellyBand, BellyBandSpec, pointsPerMm } from './belly-band'
 import { useBellyBands } from './redux/belly-band-redux'
 
 // Create styles
@@ -24,16 +23,16 @@ const styles = StyleSheet.create({
   }
 });
 
-function paintFunc(painter: any, spec: BellyBandSpec): null {
-  paintBellyBand(painter, new BellyBand({
-    width: spec.width,
-    height: spec.height,
-    depth: spec.depth,
-  }), {
-    x: -100,
-    y: 72,
-  });
-  return null;
+function paintFunc(painter: any, specs: BellyBandSpec[]): null {
+  let x = 0;
+  let y = 40;
+
+  specs.forEach(spec => {
+    paintBellyBand(painter, new BellyBand(spec), {x, y});  
+    x += (spec.height + 10) * pointsPerMm;
+  })
+
+  return null
 }
 
 // Create Document Component
@@ -49,7 +48,7 @@ export const MyPdf = () => {
         <View style={styles.section}>
           <Text>Section #2</Text>
         </View>
-        <Canvas style={styles.canvas} paint={(painter) => paintFunc(painter, bellyBands[0])}>
+        <Canvas style={styles.canvas} paint={(painter) => paintFunc(painter, bellyBands)}>
         </Canvas>
       </Page>
     </Document>

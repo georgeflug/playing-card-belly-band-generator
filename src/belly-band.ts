@@ -11,7 +11,7 @@ export type Rectangle = {
 
 const pointsPerInch = 72;
 const mmPerInch = 24.4;
-const pointsPerMm = pointsPerInch / mmPerInch;
+export const pointsPerMm = pointsPerInch / mmPerInch;
 
 export class BellyBand {
   constructor(private spec: BellyBandSpec) {}
