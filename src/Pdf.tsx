@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 function paintFunc(painter: any, specs: BellyBandSpec[]): null {
-  let x = 0;
+  let x = 40;
   let y = 40;
 
   specs.forEach(spec => {
@@ -42,12 +42,6 @@ export const MyPdf = () => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text>Section #1</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>Section #2</Text>
-        </View>
         <Canvas style={styles.canvas} paint={(painter) => paintFunc(painter, bellyBands)}>
         </Canvas>
       </Page>
