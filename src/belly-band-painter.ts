@@ -1,4 +1,5 @@
 import { BellyBand, Rectangle } from './belly-band'
+import { Painter } from './Painter'
 
 export type Offset = {
   x: number
@@ -9,7 +10,7 @@ export function paintBellyBand(painter: any, bellyBand: BellyBand, offset: Offse
   drawRectanglesVertically(painter, bellyBand.getRectangles(), offset);
 }
 
-function drawRectanglesVertically(painter: any, rectangles: Rectangle[], offset: Offset) {
+function drawRectanglesVertically(painter: Painter, rectangles: Rectangle[], offset: Offset) {
   let startY = offset.y;
   for (let rect of rectangles) {
     painter.rect(offset.x, startY, rect.width, rect.height).stroke();
