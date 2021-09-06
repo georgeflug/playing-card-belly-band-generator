@@ -27,6 +27,12 @@ const App = () => {
     })
   }
 
+  function handleTextChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, index: number) {
+    handleChange(index, {
+      text: event.target.value,
+    })
+  }
+
   function handleChange(index: number, patchValues: Partial<BellyBandSpec>) {
     updateBellyBand({
       index,
@@ -47,6 +53,9 @@ const App = () => {
 
           <label>Depth</label>
           <input type="text" value={band.depth} onChange={e => handleDepthChange(e, index)}></input>
+
+          <label>Text</label>
+          <input type="text" value={band.text} onChange={e => handleTextChange(e, index)}></input>
 
           <button onClick={() => addBellyBand()}>Add</button>
         </div>
