@@ -5,7 +5,8 @@ export type Painter = {
   path: (svgPath: string) => Painter
   fill: () => Painter // todo
   font: (font: PdfFontName | Buffer | string) => Painter
-  text: (text: string) => Painter
+  text: (text: string, optionalProps?: { width?: number, align: PdfTextAlign}) => Painter
+  widthOfString: (text: string, optionalProps?: { width?: number, align: PdfTextAlign}) => Painter
   rect: (x: number, y: number, width: number, height: number) => Painter
   scale: (factor: number) => Painter
   moveTo: (x: number, y: number) => Painter
@@ -51,3 +52,4 @@ export type PdfFontName = 'Courier'
 
 export type PdfLineCap = 'butt' | 'round' | 'square'
 export type PdfLineJoin = 'miter' | 'round' | 'bevel'
+export type PdfTextAlign = 'left' | 'center' | 'right' | 'justify'

@@ -1,19 +1,10 @@
-import { BellyBand, Rectangle } from './belly-band'
+import { BellyBandSpec } from './belly-band'
+import { getRectangles } from './belly-band-layout-calculator'
 import { Painter } from './Painter'
 
-export type Offset = {
-  x: number
-  y: number
-}
-
-export function paintBellyBand(painter: any, bellyBand: BellyBand, offset: Offset): void {
-  drawRectanglesVertically(painter, bellyBand.getRectangles(), offset);
-}
-
-function drawRectanglesVertically(painter: Painter, rectangles: Rectangle[], offset: Offset) {
-  let startY = offset.y;
-  for (let rect of rectangles) {
-    painter.rect(offset.x, startY, rect.width, rect.height).stroke();
-    startY += rect.height;
+export function paintBellyBands(painter: Painter, bellyBands: BellyBandSpec[]): null {
+  for (let rect of getRectangles(bellyBands)) {
+    painter.rect(rect.left, rect.top, rect.width, rect.height).stroke();
   }
+  return null;
 }

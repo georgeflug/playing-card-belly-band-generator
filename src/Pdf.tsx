@@ -1,8 +1,8 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/renderer';
-import { paintBellyBand } from './belly-band-painter'
-import { BellyBand, BellyBandSpec, pointsPerMm } from './belly-band'
+import { paintBellyBands } from './belly-band-painter'
 import { useBellyBands } from './redux/belly-band-redux'
+import { getBoundedTexts } from './belly-band-layout-calculator'
 
 // Create styles
 const styles = StyleSheet.create({
@@ -23,18 +23,6 @@ const styles = StyleSheet.create({
   }
 });
 
-function paintFunc(painter: any, specs: BellyBandSpec[]): null {
-  let x = 40;
-  let y = 40;
-
-  specs.forEach(spec => {
-    paintBellyBand(painter, new BellyBand(spec), {x, y});  
-    x += (spec.height + 10) * pointsPerMm;
-  })
-
-  return null
-}
-
 // Create Document Component
 export const MyPdf = () => {
   const { bellyBands } = useBellyBands();
@@ -42,8 +30,14 @@ export const MyPdf = () => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Canvas style={styles.canvas} paint={(painter) => paintFunc(painter, bellyBands)}>
+        <Canvas style={styles.canvas} paint={(painter) => paintBellyBands(painter, bellyBands)}>
         </Canvas>
+        { getBoundedTexts(bellyBands).map(boundedText => (
+          <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', ...boundedText.bound }}>
+            <Text style={{ transform: 'rotate(-90)' }}>{boundedText.text}</Text>          
+          </View>
+        ))
+        }
       </Page>
     </Document>
   )

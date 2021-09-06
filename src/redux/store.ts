@@ -8,11 +8,13 @@ const bellyBands: BellyBandSpec[] = [
     width: 30,
     height: 20,
     depth: 10,
+    text: "Test 1",
   },
   {
     width: 35,
     height: 25,
     depth: 15,
+    text: "Test 2",
   }
 ]
 export const store = createStore(rootReducer, { bellyBands }, composeWithDevTools());
