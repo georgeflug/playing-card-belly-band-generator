@@ -1,4 +1,3 @@
-import { getTextOfJSDocComment } from 'typescript'
 import { BellyBandSpec } from './belly-band'
 
 const pointsPerInch = 72;
@@ -12,12 +11,22 @@ export type BoundingBox = {
   height: number
 }
 
+export type Line = {
+  startX: number
+  startY: number
+  endX: number
+  endY: number
+}
+
 export type BoundedText = {
   text: string
   textSize: number
   rotate: boolean
   bound: BoundingBox
 }
+
+const overlapPercentage = 0.25;
+const endWidth = 0.5 + overlapPercentage;
 
 export function getRectangles(specs: BellyBandSpec[]): BoundingBox[] {
   const rectangles: BoundingBox[] = [];
@@ -34,31 +43,31 @@ export function getRectangles(specs: BellyBandSpec[]): BoundingBox[] {
         left: x,
         top: y,
         width: heightPoints,
-        height: widthPoints * 0.75,
+        height: widthPoints * endWidth,
       },
       {
         left: x,
-        top: y + widthPoints * 0.75,
+        top: y + widthPoints * endWidth,
         width: heightPoints,
         height: depthPoints,
       },
       {
         left: x,
-        top: y + widthPoints * 0.75 + depthPoints,
+        top: y + widthPoints * endWidth + depthPoints,
         width: heightPoints,
         height: widthPoints,
       },
       {
         left: x,
-        top: y + widthPoints * 1.75 + depthPoints,
+        top: y + widthPoints + widthPoints * endWidth + depthPoints,
         width: heightPoints,
         height: depthPoints,
       },
       {
         left: x,
-        top: y + widthPoints * 1.75 + depthPoints * 2,
+        top: y + widthPoints + widthPoints * endWidth + depthPoints * 2,
         width: heightPoints,
-        height: widthPoints * 0.75,
+        height: widthPoints * endWidth,
       },
     );
 
@@ -66,6 +75,34 @@ export function getRectangles(specs: BellyBandSpec[]): BoundingBox[] {
   }
 
   return rectangles;
+}
+
+export function getCutLines(specs: BellyBandSpec[]): Line[] {
+  const lines: Line[] = [];
+  let x = 40;
+  let y = 40;
+
+  for (let spec of specs) {
+    const widthPoints = spec.width * pointsPerMm;
+    const heightPoints = spec.height * pointsPerMm;
+    const depthPoints = spec.depth * pointsPerMm;
+
+    lines.push({
+      startX: x,
+      startY: y + widthPoints * overlapPercentage,
+      endX: x + heightPoints / 2,
+      endY: y + widthPoints * overlapPercentage,
+    }, {
+      startX: x + heightPoints / 2,
+      startY: y + widthPoints + widthPoints * endWidth + depthPoints * 2 + widthPoints * 0.5,
+      endX: x + heightPoints,
+      endY: y + widthPoints + widthPoints * endWidth + depthPoints * 2 + widthPoints * 0.5,
+    })
+
+    x += (spec.height + 10) * pointsPerMm;
+  }
+
+  return lines;
 }
 
 export function getBoundedTexts(specs: BellyBandSpec[]): BoundedText[] {
@@ -85,7 +122,7 @@ export function getBoundedTexts(specs: BellyBandSpec[]): BoundedText[] {
         rotate: spec.rotate,
         bound: {
           left: x,
-          top: y + widthPoints * 0.75 + depthPoints,
+          top: y + widthPoints * endWidth + depthPoints,
           width: heightPoints,
           height: widthPoints,
         },
