@@ -9,7 +9,6 @@ import { Font } from '@react-pdf/renderer'
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    backgroundColor: '#E4E4E4',
     width: '100%',
     height: '1024px'
   },
