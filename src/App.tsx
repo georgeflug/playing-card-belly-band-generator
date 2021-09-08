@@ -56,7 +56,7 @@ const App = () => {
     <div className="App">
       {/* <header className="App-header"> */}
       { bellyBands.map((band, index) => (
-        <div>
+        <div key={index}>
           <label>Width</label>
           <input type="text" value={band.width} onChange={e => handleWidthChange(e, index)}></input>
 
