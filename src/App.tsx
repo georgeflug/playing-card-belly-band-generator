@@ -61,7 +61,7 @@ const App = () => {
           <input type="text" value={band.depth} onChange={e => handleDepthChange(e, index)}></input>
 
           <label>Text</label>
-          <input type="text" value={band.text} onChange={e => handleTextChange(e, index)}></input>
+          <textarea value={band.text} onChange={e => handleTextChange(e, index)}></textarea>
 
           <label>Text Size</label>
           <input type="text" value={band.textSize} onChange={e => handleTextSizeChange(e, index)}></input>
