@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet, Canvas } from '@react-pdf/rende
 import { paintBellyBands } from './belly-band-painter'
 import { useBellyBands } from './redux/belly-band-redux'
 import { getBoundedTexts } from './belly-band-layout-calculator'
+import { Font } from '@react-pdf/renderer'
 
 // Create styles
 const styles = StyleSheet.create({
@@ -22,6 +23,13 @@ const styles = StyleSheet.create({
     height: 300
   }
 });
+
+const hyphenationCallback = (word: string): string[] => {
+  // disable hyphenation
+  return [word];
+}
+
+Font.registerHyphenationCallback(hyphenationCallback);
 
 // Create Document Component
 export const MyPdf = () => {
