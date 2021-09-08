@@ -39,6 +39,12 @@ const App = () => {
     })
   }
 
+  function handleRotateChange(event: React.ChangeEvent<HTMLInputElement>, index: number) {
+    handleChange(index, {
+      rotate: event.target.checked,
+    })
+  }
+
   function handleChange(index: number, patchValues: Partial<BellyBandSpec>) {
     updateBellyBand({
       index,
@@ -65,6 +71,9 @@ const App = () => {
 
           <label>Text Size</label>
           <input type="text" value={band.textSize} onChange={e => handleTextSizeChange(e, index)}></input>
+
+          <input id="rotate-checkbox" type="checkbox" checked={band.rotate} onChange={e => handleRotateChange(e, index)}></input>
+          <label htmlFor="rotate-checkbox">Rotate Text</label>
 
           <button onClick={() => addBellyBand()}>Add</button>
         </div>

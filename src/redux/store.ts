@@ -10,6 +10,7 @@ const bellyBands: BellyBandSpec[] = [
     depth: 10,
     text: "Test 1",
     textSize: 12,
+    rotate: true,
   },
   {
     width: 35,
@@ -17,6 +18,7 @@ const bellyBands: BellyBandSpec[] = [
     depth: 15,
     text: "Test 2",
     textSize: 12,
+    rotate: false,
   }
 ]
 export const store = createStore(rootReducer, { bellyBands }, composeWithDevTools());

@@ -4,6 +4,7 @@ export type BellyBandSpec = {
   depth: number
   text: string
   textSize: number
+  rotate: boolean
 }
 
 export type Rectangle = {

@@ -15,6 +15,7 @@ export type BoundingBox = {
 export type BoundedText = {
   text: string
   textSize: number
+  rotate: boolean
   bound: BoundingBox
 }
 
@@ -81,6 +82,7 @@ export function getBoundedTexts(specs: BellyBandSpec[]): BoundedText[] {
       {
         text: spec.text,
         textSize: spec.textSize,
+        rotate: spec.rotate,
         bound: {
           left: x,
           top: y + widthPoints * 0.75 + depthPoints,

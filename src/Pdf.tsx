@@ -42,7 +42,7 @@ export const MyPdf = () => {
         </Canvas>
         { getBoundedTexts(bellyBands).map(boundedText => (
           <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'absolute', ...boundedText.bound }}>
-            <Text style={{ transform: 'rotate(-90)', fontSize: boundedText.textSize }}>{boundedText.text}</Text>          
+            <Text style={{ transform: boundedText.rotate ? 'rotate(0)' : 'rotate(-90)', fontSize: boundedText.textSize }}>{boundedText.text}</Text>          
           </View>
         ))
         }
