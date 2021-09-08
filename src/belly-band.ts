@@ -3,6 +3,7 @@ export type BellyBandSpec = {
   height: number
   depth: number
   text: string
+  textSize: number
 }
 
 export type Rectangle = {
