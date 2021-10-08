@@ -10,31 +10,6 @@ export type BellyBandUpdateProps = {
   patchValues: Partial<BellyBandSpec>
 }
 
-export const bellyBandReducer = (state: any = {}, action: any) => {
-  if (action.type === BELLY_BAND_ADD) {
-    return {
-      ...state,
-      bellyBands: [
-        ...(state.bellyBands || []),
-        {}
-      ]
-    };
-  } else if (action.type === BELLY_BAND_UPDATE) {
-    const newBellyBands = [...state.bellyBands]
-    const updateProps = action.payload as BellyBandUpdateProps
-    console.log(updateProps)
-    newBellyBands[updateProps.index] = {
-      ...newBellyBands[updateProps.index],
-      ...updateProps.patchValues
-    }
-    return {
-      ...state,
-      bellyBands: newBellyBands
-    }
-  }
-  return state;
-};
-
 export const useBellyBands = () => {
   return {
     bellyBands: useSelector((state: any) => state.bellyBands) as BellyBandSpec[],
@@ -42,3 +17,35 @@ export const useBellyBands = () => {
     updateBellyBand: useDispatchForAction<BellyBandUpdateProps>(BELLY_BAND_UPDATE)
   };
 };
+
+export const bellyBandReducer = (state: any = {}, action: any) => {
+  if (action.type === BELLY_BAND_ADD) {
+    return addBellyBandReducer(state);
+  } else if (action.type === BELLY_BAND_UPDATE) {
+    return bellyBandUpdateReducer(state, action.payload);
+  }
+  return state;
+};
+
+const addBellyBandReducer = (state: any = {}) => {
+  return {
+    ...state,
+    bellyBands: [
+      ...(state.bellyBands || []),
+      {}
+    ]
+  };
+}
+
+const bellyBandUpdateReducer = (state: any = {}, payload: any) => {
+  const newBellyBands = [...state.bellyBands]
+  const updateProps = payload as BellyBandUpdateProps
+  newBellyBands[updateProps.index] = {
+    ...newBellyBands[updateProps.index],
+    ...updateProps.patchValues
+  }
+  return {
+    ...state,
+    bellyBands: newBellyBands
+  }
+}
