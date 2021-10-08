@@ -12,8 +12,8 @@ const App = () => {
   return (
     <div className="App">
       {/* <header className="App-header"> */}
-      { bellyBands.map((band, index) => (
-        <BellyBandEditor band={band} index={index} />
+      { bellyBands.map(band => (
+        <BellyBandEditor band={band} />
       )) }
       <div>
         <PDFViewer width="100%" height="1024px">

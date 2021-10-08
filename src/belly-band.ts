@@ -1,4 +1,5 @@
 export type BellyBandSpec = {
+  id: number
   width: number
   height: number
   depth: number

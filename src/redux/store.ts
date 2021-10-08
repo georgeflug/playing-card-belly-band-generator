@@ -5,6 +5,7 @@ import { rootReducer } from './rootReduxReducer'
 
 const bellyBands: BellyBandSpec[] = [
   {
+    id: 1,
     width: 30,
     height: 20,
     depth: 10,
@@ -13,6 +14,7 @@ const bellyBands: BellyBandSpec[] = [
     rotate: true,
   },
   {
+    id: 2,
     width: 35,
     height: 25,
     depth: 15,

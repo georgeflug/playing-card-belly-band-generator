@@ -1,12 +1,12 @@
 import {useSelector} from "react-redux";
-import { BellyBandSpec } from '../belly-band'
+import {  BellyBandSpec } from '../belly-band'
 import { useDispatchForAction } from './useDispatchForAction'
 
 const BELLY_BAND_ADD = 'BELLY_BAND_ADD';
 const BELLY_BAND_UPDATE = 'BELLY_BAND_UPDATE';
 
 export type BellyBandUpdateProps = {
-  index: number
+  id: number
   patchValues: Partial<BellyBandSpec>
 }
 
@@ -28,11 +28,14 @@ export const bellyBandReducer = (state: any = {}, action: any) => {
 };
 
 const addBellyBandReducer = (state: any = {}) => {
+  const existingBands = state.bellyBands || []
   return {
     ...state,
     bellyBands: [
-      ...(state.bellyBands || []),
-      {}
+      ...existingBands,
+      {
+        id: existingBands.length + 1
+      }
     ]
   };
 }
@@ -40,8 +43,9 @@ const addBellyBandReducer = (state: any = {}) => {
 const bellyBandUpdateReducer = (state: any = {}, payload: any) => {
   const newBellyBands = [...state.bellyBands]
   const updateProps = payload as BellyBandUpdateProps
-  newBellyBands[updateProps.index] = {
-    ...newBellyBands[updateProps.index],
+  const index = newBellyBands.findIndex((band: BellyBandSpec) => band.id === updateProps.id)
+  newBellyBands[index] = {
+    ...newBellyBands[index],
     ...updateProps.patchValues
   }
   return {
