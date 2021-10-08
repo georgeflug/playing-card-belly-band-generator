@@ -1,8 +1,10 @@
 import { BellyBandSpec } from '../belly-band'
 import { useBellyBands } from '../redux/belly-band-redux'
+import { useEditBellyBand } from '../redux/editTileRedux'
 
 export const BellyBandEditor = (props: { band: BellyBandSpec }) => {
   const {addBellyBand, updateBellyBand} = useBellyBands();
+  const { endEditBellyBand } = useEditBellyBand()
   const { band } = props;
 
   function handleWidthChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
@@ -50,6 +52,8 @@ export const BellyBandEditor = (props: { band: BellyBandSpec }) => {
 
   return (
     <div>
+      <button onClick={() => endEditBellyBand()}>&lt;--</button>
+
       <label>Width</label>
       <input type="text" value={band.width} onChange={e => handleWidthChange(e)}></input>
 
