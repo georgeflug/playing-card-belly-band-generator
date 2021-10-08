@@ -11,7 +11,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
       { bellyBands.map(band => (
         <BellyBandEditor key={band.id} band={band} />
       )) }
