@@ -13,7 +13,7 @@ const App = () => {
     <div className="App">
       {/* <header className="App-header"> */}
       { bellyBands.map(band => (
-        <BellyBandEditor band={band} />
+        <BellyBandEditor key={band.id} band={band} />
       )) }
       <div>
         <PDFViewer width="100%" height="1024px">

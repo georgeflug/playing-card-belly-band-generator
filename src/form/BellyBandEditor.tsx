@@ -43,13 +43,13 @@ export const BellyBandEditor = (props: { band: BellyBandSpec }) => {
 
   function handleChange(patchValues: Partial<BellyBandSpec>) {
     updateBellyBand({
-      id: band.id,
+      id:band.id,
       patchValues
     })
   }
 
   return (
-    <div key={band.id}>
+    <div>
       <label>Width</label>
       <input type="text" value={band.width} onChange={e => handleWidthChange(e)}></input>
 
